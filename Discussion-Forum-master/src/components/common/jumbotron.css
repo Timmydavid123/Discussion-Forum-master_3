@@ -1,0 +1,25 @@
+
+.jumbotron {
+    position: relative;
+  }
+  
+  .search-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .smooth-icon {
+    width: 30px; /* Adjust the size as needed */
+    height: auto;
+  }
+  
+  .search-box {
+    padding: 10px;
+    margin-left: 10px;
+    width: 300px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px;
+  }
+  
