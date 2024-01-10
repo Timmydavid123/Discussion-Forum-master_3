@@ -2,7 +2,7 @@
 .jumbotron {
     position: relative;
     background-color: white;
-    overflow: hidden;
+    overflow: hidden; /* Hide the overflowing content */
   }
   
   .search-container {
@@ -35,6 +35,41 @@
     border-radius: 5px;
     cursor: pointer;
     font-size: 16px;
+  }
+  .ads-container {
+    white-space: nowrap;
+    overflow-x: hidden;
+    position: relative;
+    width: 100%;
+    padding: 10px; /* Add padding for better visibility */
+  }
+  
+  .ads-content {
+    display: inline-block;
+    padding: 10px;
+    margin-right: 20px; /* Add margin between ads for better separation */
+    background-color: #f1f1f1; /* Add a background color for better visibility */
+    border-radius: 8px; /* Add rounded corners for a polished look */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add a subtle shadow for depth */
+  }
+  
+  .scroll-buttons {
+    position: absolute;
+    top: 10%;
+    transform: translateY(-50%);
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .scroll-buttons button {
+    background-color: #4CAF50; /* Green background color */
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
   }
   /* Media Query for Mobile Screens */
 @media only screen and (max-width: 600px) {

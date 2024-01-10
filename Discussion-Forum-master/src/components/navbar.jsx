@@ -31,6 +31,17 @@ const NavBar = ({ user }) => {
               Forum
             </NavLink>
           </li>
+          <li className="nav-item">
+            <NavLink className="nav-link" to="/news">
+              News
+            </NavLink>
+          </li>
+          {/* Add the "Connect" link */}
+          <li className="nav-item">
+            <NavLink className="nav-link" to="/connect">
+              Connect
+            </NavLink>
+          </li>
         </ul>
         <ul className="navbar-nav ml-auto">
           {!user && (
