@@ -1,25 +1,49 @@
 
 .jumbotron {
     position: relative;
+    background-color: white;
+    overflow: hidden;
   }
   
   .search-container {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
+    flex-direction: column; 
+    justify-content: center; 
+    align-items: center; 
+    margin-bottom: 200px;
   }
   
   .smooth-icon {
-    width: 30px; /* Adjust the size as needed */
-    height: auto;
+    width: 350px; 
+    margin-bottom: -120px; 
   }
   
   .search-box {
     padding: 10px;
-    margin-left: 10px;
-    width: 300px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    font-size: 16px;
+    width: 200px;
+    border: 5px solid #ddd;
+    border-radius: 10px;
+    font-size: 12px;
+    margin-bottom: 20px; 
   }
   
+  .search-button {
+    padding: 10px;
+    border: none;
+    background-color: #4CAF50; 
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+  }
+  /* Media Query for Mobile Screens */
+@media only screen and (max-width: 600px) {
+    .smooth-icon {
+      width: 100%;
+      max-width: none;
+    }
+    .search-box {
+        width: 100%;
+    max-width: 350px; /* Adjust the maximum width for smaller screens */
+    }
+  }
