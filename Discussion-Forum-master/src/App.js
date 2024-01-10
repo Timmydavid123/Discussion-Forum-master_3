@@ -15,6 +15,7 @@ import Register from "./components/register";
 import NavBar from "./components/navbar";
 import ProtectedRoute from "./components/common/protectedRoute";
 import PostPage from "./components/PostPage";
+import NewsPage from "./components/news/news.jsx"
 
 class App extends Component {
   state = {};
@@ -50,6 +51,7 @@ class App extends Component {
             render={(props) => <PostPage {...props} user={this.state.user} />}
           />
           <Route exact path="/" component={Jumotron} />
+          <Route exact path="/news" component={NewsPage} />
           <Redirect from="/users" to="/users/login " />
           <Redirect to="/not-found" />
         </Switch>
