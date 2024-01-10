@@ -1,4 +1,5 @@
 import React, { useRef } from "react";
+import { Link } from "react-router-dom"; // Import Link from react-router-dom
 import "./jumbotron.css";
 
 const Jumbotron = () => {
@@ -28,6 +29,7 @@ const Jumbotron = () => {
         <button onClick={() => handleScroll("right")}>{">"}</button>
       </div>
       <div className="search-container">
+        
         <img src="logo1.png" alt="images" className="smooth-icon" />
         <input
           type="text"
@@ -35,6 +37,7 @@ const Jumbotron = () => {
           className="search-box"
         />
         <button className="search-button">Search</button>
+        <Link to="/forum" className="forum-link">Forum</Link>
       </div>
     </div>
   );

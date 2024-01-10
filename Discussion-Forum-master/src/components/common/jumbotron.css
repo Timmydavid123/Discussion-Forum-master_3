@@ -27,15 +27,32 @@
     margin-bottom: 20px; 
   }
   
-  .search-button {
+  .search-box {
     padding: 10px;
-    border: none;
-    background-color: #4CAF50; 
-    color: white;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
+    width: 200px;
+    border: 5px solid #ddd;
+    border-radius: 10px;
+    font-size: 12px;
+    margin-bottom: 20px;
   }
+
+.search-button {
+  padding: 10px;
+  border: none;
+  background-color: #4CAF50;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+.forum-link {
+    text-decoration: none;
+    color: #333;
+    font-size: 16px;
+    margin-top: 10px; /* Adjust the margin as needed */
+  }
+  
+
   .ads-container {
     white-space: nowrap;
     overflow-x: hidden;
@@ -80,5 +97,6 @@
     .search-box {
         width: 100%;
     max-width: 350px; /* Adjust the maximum width for smaller screens */
+    margin-right: 0; /* Remove margin for smaller screens */
     }
   }
