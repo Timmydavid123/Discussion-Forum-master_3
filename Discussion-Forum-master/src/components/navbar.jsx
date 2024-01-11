@@ -11,7 +11,7 @@ const NavBar = ({ user }) => {
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
       <NavLink className="navbar-brand" to="/">
-        <span style={{ color: "white" }}>Xooth</span>
+        <span style={{ color: "white" }}>Home</span>
       </NavLink>
 
       <NavLink className="nav-link" to="/dashboard">
@@ -25,12 +25,6 @@ const NavBar = ({ user }) => {
       <div className={`collapse navbar-collapse ${isCollapsed ? '' : 'show'}`} id="navbarNav">
         {/* Items inside collapsible section */}
         <ul className="navbar-nav mr-auto">
-          <li className="nav-item">
-            <NavLink className="nav-link" to="/">
-              <span style={{ color: "white" }}>Home</span>
-            </NavLink>
-          </li>
-
           <li className="nav-item">
           <NavLink className="nav-link" to="/connect">
         <span style={{ color: "white" }}>Connect</span>

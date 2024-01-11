@@ -16,6 +16,7 @@ import NavBar from "./components/navbar";
 import ProtectedRoute from "./components/common/protectedRoute";
 import PostPage from "./components/PostPage";
 import NewsPage from "./components/news/news.jsx"
+import ConnectPage from "./components/Connect/ConnectPage.jsx"
 
 class App extends Component {
   state = {};
@@ -52,6 +53,7 @@ class App extends Component {
           />
           <Route exact path="/" component={Jumotron} />
           <Route exact path="/news" component={NewsPage} />
+          <Route exact path="/connect" component={ConnectPage} />
           <Redirect from="/users" to="/users/login " />
           <Redirect to="/not-found" />
         </Switch>

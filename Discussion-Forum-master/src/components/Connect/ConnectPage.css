@@ -1,0 +1,19 @@
+.connect-page-container {
+    max-width: 800px;
+    margin: auto;
+    padding: 20px;
+    text-align: center;
+  }
+  
+  #category-dropdown {
+    margin-top: 10px;
+  }
+  
+  .image-section {
+    margin-top: 20px;
+  
+    img {
+      max-width: 100%;
+      margin-bottom: 10px;
+    }
+  }
