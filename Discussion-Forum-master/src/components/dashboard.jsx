@@ -6,7 +6,7 @@ import Posts from "./posts";
 import { paginate } from "../utils/paginate";
 import { api } from "../config.js";
 import http from "../services/httpService";
-import Jumotron from "./common/jumbotron";
+
 
 class Dashboard extends Component {
   state = {
