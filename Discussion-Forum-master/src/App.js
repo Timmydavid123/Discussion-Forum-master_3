@@ -31,6 +31,7 @@ class App extends Component {
   render() {
     return (
       <div>
+        
         <NavBar user={this.state.user} />
         {/* on the dashboard, have a quesry string parameter to 
        to find the method of sorting of posts.(using query string package) */}
@@ -38,6 +39,7 @@ class App extends Component {
           <Route path="/users/login" component={Log} />
           <Route path="/users/register" component={Register} />
           <Route path="/users/logout" component={Logout} />
+          <Route exact path="/" component={Jumotron} />
           <Route
             path="/dashboard"
             render={(props) => <Dashboard {...props} user={this.state.user} />}
@@ -51,7 +53,7 @@ class App extends Component {
             path="/post/:id"
             render={(props) => <PostPage {...props} user={this.state.user} />}
           />
-          <Route exact path="/" component={Jumotron} />
+          
           <Route exact path="/news" component={NewsPage} />
           <Route exact path="/connect" component={ConnectPage} />
           <Redirect from="/users" to="/users/login " />

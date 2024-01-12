@@ -62,8 +62,8 @@ class Dashboard extends Component {
     if (allposts.length === 0)
       return <p>There are no posts</p>;
     return (
-      <React.Fragment>
-        <Jumotron />
+      // <React.Fragment>
+      //   <Jumotron />
         <div className="container">
           <div className="row">
             <div className="col">
@@ -102,7 +102,7 @@ class Dashboard extends Component {
             />
           </div>
         </div>
-      </React.Fragment>
+      // </React.Fragment>
     );
   }
 }
