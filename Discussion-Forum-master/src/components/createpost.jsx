@@ -11,7 +11,14 @@ class NewPost extends Form {
   state = {
     data: { title: "", description: "", tags: [] },
     errors: { title: "", description: "", tags: [] },
-    tags: [],
+    tags: [
+      { _id: "1", name: "Education" },
+      { _id: "2", name: "Jobs" },
+      { _id: "3", name: "Church" },
+      { _id: "4", name: "News" },
+      { _id: "5", name: "Car Talk" },
+    
+    ],
   };
   schema = {
     title: Joi.string().required().min(10).label("Title"),
@@ -89,13 +96,13 @@ class NewPost extends Form {
                 <label htmlFor="tags">Related Tags</label>
                 <br />
                 {tags.map((tag) => (
-                  <React.Fragment>
+                  <React.Fragment key={tag._id}>
                     <label className="mr-3 ml-3">
                       <input
-                        key={tag._id}
                         className="form-check-input"
                         type="checkbox"
                         onChange={() => this.handleTagChange(tag._id)}
+                        checked={data.tags.includes(tag._id)}
                       />
                       {tag.name}
                     </label>

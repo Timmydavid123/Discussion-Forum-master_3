@@ -11,18 +11,20 @@ const tags = require("./routes/tags");
 const replies = require("./routes/replies");
 const app = express();
 
+const { MONGODB_URI } = process.env;
 
-let mongoDBURL = process.env.mongoDBURL;
+// console.log('MongoDB Connection URI:', MONGODB_URI);
 
-mongoose
-  .connect(mongoDBURL, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-    useCreateIndex: true,
-    useFindAndModify: false,
+mongoose.connect(MONGODB_URI, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+})
+  .then(() => {
+    console.log('Connected to MongoDB');
   })
-  .then(() => console.log("Connected to MongoDB"))
-  .catch((err) => console.error("could not connect to mongoDB"));
+  .catch((error) => {
+    console.error('MongoDB connection error:', error);
+  });
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));

@@ -22,7 +22,7 @@ const Jumbotron = () => {
             {/* Replace with your ad content */}
             <p>Ad {index + 1}</p>
           </div>
-        ))}
+        ))} 
       </div>
       <div className="scroll-buttons">
         <button onClick={() => handleScroll("left")}>{"<"}</button>
