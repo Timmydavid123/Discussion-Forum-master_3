@@ -17,6 +17,7 @@ import ProtectedRoute from "./components/common/protectedRoute";
 import PostPage from "./components/PostPage";
 import NewsPage from "./components/news/news.jsx"
 import ConnectPage from "./components/Connect/ConnectPage.jsx"
+import Newss from "./components/news/news2.jsx"
 
 class App extends Component {
   state = {};
@@ -56,6 +57,7 @@ class App extends Component {
           
           <Route exact path="/news" component={NewsPage} />
           <Route exact path="/connect" component={ConnectPage} />
+          <Route exact path="/newss" component={Newss} />
           <Redirect from="/users" to="/users/login " />
           <Redirect to="/not-found" />
         </Switch>

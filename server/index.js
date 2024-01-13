@@ -9,7 +9,12 @@ const users = require("./routes/users");
 const posts = require("./routes/posts");
 const tags = require("./routes/tags");
 const replies = require("./routes/replies");
+const http = require('http');
+const socketIO = require('socket.io');
+const newsRouter = require('./controller/newsController');
+
 const app = express();
+
 
 const { MONGODB_URI } = process.env;
 
@@ -27,9 +32,31 @@ mongoose.connect(MONGODB_URI, {
   });
 
 app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+app.use(express.urlencoded({ extended: true }));                       
 app.use(cookieParser());
 app.use(cors());
+
+// Define corsOptions before using it
+const corsOptions = {
+  origin: '*',
+  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+  credentials: true,
+  optionsSuccessStatus: 204,
+  allowedHeaders: 'Content-Type, Authorization',
+};
+
+// Handle preflight requests
+app.options('*', cors(corsOptions));
+
+// Use the CORS middleware for all routes
+app.use(cors(corsOptions));
+
+// Add the Cross-Origin-Opener-Policy header here
+app.use((req, res, next) => {
+  res.setHeader('Cross-Origin-Opener-Policy', 'same-origin');
+  next();
+});
+
 
 app.get("/", (req, res) => {
   res.send("request successfully sent!");
@@ -39,6 +66,17 @@ app.use("/users", users);
 app.use("/posts", posts);
 app.use("/tags", tags);
 app.use("/reply", replies);
+
+// Include the news-related routes
+app.use(newsRouter);
+
+
+
+
+setInterval(async () => {
+  const allNews = await getAllNews();
+  io.emit('trendingNews', allNews);
+}, 60000);
 
 const port = process.env.PORT || 4000;
 

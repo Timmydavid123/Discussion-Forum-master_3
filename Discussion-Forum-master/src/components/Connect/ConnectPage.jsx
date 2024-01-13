@@ -1,24 +1,192 @@
 import React, { useState } from 'react';
-import { Dropdown } from 'react-bootstrap';
-import './ConnectPage.css'; // Import your custom CSS for styling
+import { Dropdown, Button, Modal, Form } from 'react-bootstrap';
+import './ConnectPage.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 const ConnectPage = () => {
+  const [selectedField, setSelectedField] = useState(null);
   const [selectedCategory, setSelectedCategory] = useState(null);
+  const [selectedSubcategory, setSelectedSubcategory] = useState(null);
+  const [showJoinModal, setShowJoinModal] = useState(false);
 
-  const handleCategoryChange = (category) => {
+  const categories = [
+    {
+      name: 'Professionals',
+      subcategories: [
+        'Doctor', 'Nurse', 'Pharmacist', 'Dentist', 'Medical Laboratory Scientist',
+        'Civil Engineer', 'Mechanical Engineer', 'Electrical Engineer', 'Computer Engineer', 'Chemical Engineer',
+        'Lawyer', 'Judge', 'Legal Officer', 'Legal Researcher',
+        'Teacher', 'Lecturer', 'School Administrator', 'Educational Consultant',
+        'Software Developer', 'Network Engineer', 'Database Administrator', 'IT Consultant',
+        'Accountant', 'Financial Analyst', 'Banker', 'Auditor',
+        'Entrepreneur', 'Business Analyst', 'Human Resources Manager', 'Marketing Executive',
+        'Farmer', 'Agricultural Engineer', 'Agronomist', 'Veterinary Doctor',
+        'Journalist', 'Public Relations Officer', 'Social Media Manager', 'Radio/TV Presenter',
+        'Actor/Actress', 'Musician', 'Artist', 'Filmmaker',
+        'Architect', 'Builder', 'Real Estate Agent', 'Quantity Surveyor',
+        'Pilot', 'Driver', 'Logistics Manager', 'Traffic Warden',
+        'Environmental Scientist', 'Geologist', 'Town Planner', 'Ecologist',
+        'Hotel Manager', 'Tour Guide', 'Event Planner', 'Travel Agent'
+      ],
+    },
+    {
+      name: 'NonProfessionals',
+      subcategories: [
+        'Agricultural Labor',
+        'Artisan and Craftsmanship',
+        'Retail and Sales',
+        'Service Industry',
+        'Transportation',
+        'Construction Labor',
+        'Domestic Work',
+        'Factory Workers',
+        'Art and Entertainment',
+        'Mining and Quarrying',
+        'Casual Labor',
+        'Street Hawking',
+        'Unskilled Labor',
+        'Fishermen',
+        'Auto Mechanics',
+      ],
+    },
+    {
+      name: 'Dating',
+      subcategories: ['Romantic', 'Casual', 'Long-Term'],
+    },
+  ];
+
+  const handleFieldSelect = (field) => {
+    setSelectedField(field);
+    setSelectedCategory(null);
+    setSelectedSubcategory(null);
+  };
+
+  const handleCategorySelect = (category) => {
     setSelectedCategory(category);
-    // You can perform additional actions based on the selected category if needed
+    setSelectedSubcategory(null);
+  };
+
+  const handleSubcategorySelect = (subcategory) => {
+    setSelectedSubcategory(subcategory);
+  };
+
+  const handleShowJoinModal = () => setShowJoinModal(true);
+  const handleCloseJoinModal = () => setShowJoinModal(false);
+
+  const renderCategories = () => {
+    return (
+      <>
+        <Dropdown.Toggle variant="primary" id="category-dropdown">
+          {selectedCategory || 'Select Category'}
+        </Dropdown.Toggle>
+
+        <Dropdown.Menu>
+          {categories.map((category) => (
+            <Dropdown.Item key={category.name} eventKey={category.name}>
+              {category.name}
+            </Dropdown.Item>
+          ))}
+        </Dropdown.Menu>
+      </>
+    );
+  };
+
+  const renderSubcategories = () => {
+    return (
+      <>
+        <Dropdown.Toggle variant="primary" id="subcategory-dropdown">
+          {selectedSubcategory || 'Select Subcategory'}
+        </Dropdown.Toggle>
+
+        <Dropdown.Menu>
+          {categories
+            .find((category) => category.name === selectedCategory)
+            .subcategories.map((subcategory) => (
+              <Dropdown.Item key={subcategory} eventKey={subcategory}>
+                {subcategory}
+              </Dropdown.Item>
+            ))}
+        </Dropdown.Menu>
+      </>
+    );
+  };
+
+  const renderAdditionalFields = () => {
+    switch (selectedField) {
+      case 'Professionals':
+        return (
+          <>
+            {renderCategories()}
+            {selectedCategory && renderSubcategories()}
+            <Form.Group controlId="formBasicWorkplace">
+              <Form.Label>Your Place of Work</Form.Label>
+              <Form.Control type="text" placeholder="Enter your place of work" />
+            </Form.Group>
+            <Form.Group controlId="formBasicWorkType">
+              <Form.Label>Your Type of Work</Form.Label>
+              <Form.Control type="text" placeholder="Enter your type of work" />
+            </Form.Group>
+            <Form.Group controlId="formBasicAddress">
+              <Form.Label>Your Address</Form.Label>
+              <Form.Control type="text" placeholder="Enter your address" />
+            </Form.Group>
+            <Form.Group controlId="formBasicOffer">
+              <Form.Label>What You Have to Offer</Form.Label>
+              <Form.Control type="text" placeholder="Enter what you have to offer" />
+            </Form.Group>
+          </>
+        );
+
+      case 'NonProfessionals':
+        return (
+          <>
+            {renderCategories()}
+            {selectedCategory && renderSubcategories()}
+            <Form.Group controlId="formBasicWorkType">
+              <Form.Label>Your Type of Work</Form.Label>
+              <Form.Control type="text" placeholder="Enter your type of work" />
+            </Form.Group>
+            <Form.Group controlId="formBasicAddress">
+              <Form.Label>Your Address</Form.Label>
+              <Form.Control type="text" placeholder="Enter your address" />
+            </Form.Group>
+            <Form.Group controlId="formBasicOffer">
+              <Form.Label>What You Have to Offer</Form.Label>
+              <Form.Control type="text" placeholder="Enter what you have to offer" />
+            </Form.Group>
+          </>
+        );
+
+      case 'Dating':
+        return (
+          <>
+            {renderCategories()}
+            {selectedCategory && renderSubcategories()}
+            <Form.Group controlId="formBasicAddress">
+              <Form.Label>Your Address</Form.Label>
+              <Form.Control type="text" placeholder="Enter your address" />
+            </Form.Group>
+            <Form.Group controlId="formBasicOffer">
+              <Form.Label>What You Have to Offer</Form.Label>
+              <Form.Control type="text" placeholder="Enter what you have to offer" />
+            </Form.Group>
+          </>
+        );
+
+      default:
+        return null;
+    }
   };
 
   return (
     <div className="connect-page-container">
       <h2>Connect</h2>
-      <p>Select a category to find:</p>
+      <p>Select a field, category, and subcategory to find:</p>
 
-      {/* Category Dropdown */}
-      <Dropdown onSelect={(eventKey) => handleCategoryChange(eventKey)}>
-        <Dropdown.Toggle variant="primary" id="category-dropdown">
-          {selectedCategory || 'Select Category'}
+      {/* Field Dropdown */}
+      <Dropdown onSelect={handleFieldSelect}>
+        <Dropdown.Toggle variant="primary" id="field-dropdown">
+          {selectedField || 'Select Field'}
         </Dropdown.Toggle>
 
         <Dropdown.Menu>
@@ -28,35 +196,73 @@ const ConnectPage = () => {
         </Dropdown.Menu>
       </Dropdown>
 
-      {/* Image Section */}
-      <div className="image-section">
-        {/* Display images based on the selected category */}
-        {selectedCategory === 'Professionals' && (
-          <div>
-            <h3>Professionals</h3>
-            {/* Add images for Professionals */}
-            <img src="professional-image1.jpg" alt="Professional 1" />
-            <img src="professional-image2.jpg" alt="Professional 2" />
-          </div>
-        )}
+      {/* Category Dropdown */}
+      {selectedField && selectedField !== 'Dating' && selectedCategory === null && (
+        <Dropdown onSelect={handleCategorySelect}>
+          {renderCategories()}
+        </Dropdown>
+      )}
 
-        {selectedCategory === 'NonProfessionals' && (
-          <div>
-            <h3>Non-Professionals</h3>
-            {/* Add images for Non-Professionals */}
-            <img src="non-professional-image1.jpg" alt="Non-Professional 1" />
-            <img src="non-professional-image2.jpg" alt="Non-Professional 2" />
-          </div>
-        )}
+      {/* Subcategory Dropdown */}
+      {selectedCategory && selectedSubcategory === null && (
+        <Dropdown onSelect={handleSubcategorySelect}>
+          {renderSubcategories()}
+        </Dropdown>
+      )}
 
-        {selectedCategory === 'Dating' && (
+      {/* Display images based on the selected subcategory */}
+      {selectedCategory && selectedSubcategory && (
+        <div className="image-section">
+          <h3>{`${selectedCategory} - ${selectedSubcategory}`}</h3>
           <div>
-            <h3>Dating</h3>
-            {/* Add images for Dating */}
-            <img src="dating-image1.jpg" alt="Dating 1" />
-            <img src="dating-image2.jpg" alt="Dating 2" />
+            <p>Person 1 (Verified)</p>
+            <img src="person1-image.jpg" alt="Person 1" />
+            <span>Verified Badge</span>
           </div>
-        )}
+          <div>
+            <p>Person 2 (Verified)</p>
+            <img src="person2-image.jpg" alt="Person 2" />
+            <span>Verified Badge</span>
+          </div>
+        </div>
+      )}
+
+      {/* Join Section */}
+      <div className="join-section d-flex justify-content-end mt-3">
+        <Button variant="primary" onClick={handleShowJoinModal}>
+          Join
+        </Button>
+
+        {/* Join Modal */}
+        <Modal show={showJoinModal} onHide={handleCloseJoinModal}>
+          <Modal.Header closeButton>
+            <Modal.Title>Join and Upload Your Image</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <Form>
+              <Form.Group controlId="formBasicName">
+                <Form.Label>Your Name</Form.Label>
+                <Form.Control type="text" placeholder="Enter your name" />
+              </Form.Group>
+
+              <Form.Group controlId="formBasicImage">
+                <Form.Label>Upload Your Image</Form.Label>
+                <Form.Control type="file" accept="image/*" />
+              </Form.Group>
+
+              {renderAdditionalFields()}
+
+              <Button variant="primary" type="submit">
+                Submit
+              </Button>
+            </Form>
+          </Modal.Body>
+          <Modal.Footer>
+            <Button variant="secondary" onClick={handleCloseJoinModal}>
+              Close
+            </Button>
+          </Modal.Footer>
+        </Modal>
       </div>
     </div>
   );
