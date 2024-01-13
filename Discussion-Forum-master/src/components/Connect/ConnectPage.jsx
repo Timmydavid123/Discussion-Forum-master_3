@@ -134,6 +134,14 @@ const ConnectPage = () => {
               <Form.Label>What You Have to Offer</Form.Label>
               <Form.Control type="text" placeholder="Enter what you have to offer" />
             </Form.Group>
+            <Form.Group controlId="formComplexQuestion1">
+              <Form.Label>Describe a challenging project you've worked on.</Form.Label>
+              <Form.Control as="textarea" rows={3} placeholder="Provide details about a challenging project you've worked on." />
+            </Form.Group>
+            <Form.Group controlId="formComplexQuestion2">
+              <Form.Label>How do you stay updated with the latest trends in your industry?</Form.Label>
+              <Form.Control as="textarea" rows={3} placeholder="How do you stay updated with the latest trends in your industry?" />
+            </Form.Group>
           </>
         );
 
@@ -154,6 +162,14 @@ const ConnectPage = () => {
               <Form.Label>What You Have to Offer</Form.Label>
               <Form.Control type="text" placeholder="Enter what you have to offer" />
             </Form.Group>
+            <Form.Group controlId="formComplexQuestion1">
+              <Form.Label>Share a unique skill or talent that sets you apart.</Form.Label>
+              <Form.Control as="textarea" rows={3} placeholder="Share a unique skill or talent that sets you apart." />
+            </Form.Group>
+            <Form.Group controlId="formComplexQuestion2">
+              <Form.Label>How do you contribute to your community or social causes?</Form.Label>
+              <Form.Control as="textarea" rows={3} placeholder="How do you contribute to your community or social causes?" />
+            </Form.Group>
           </>
         );
 
@@ -170,12 +186,46 @@ const ConnectPage = () => {
               <Form.Label>What You Have to Offer</Form.Label>
               <Form.Control type="text" placeholder="Enter what you have to offer" />
             </Form.Group>
+            <Form.Group controlId="formComplexQuestion1">
+              <Form.Label>Describe your ideal date or relationship.</Form.Label>
+              <Form.Control as="textarea" rows={3} placeholder="Describe your ideal date or relationship." />
+            </Form.Group>
+            <Form.Group controlId="formComplexQuestion2">
+              <Form.Label>What qualities are you looking for in a partner?</Form.Label>
+              <Form.Control as="textarea" rows={3} placeholder="What qualities are you looking for in a partner?" />
+            </Form.Group>
           </>
         );
 
       default:
         return null;
     }
+  };
+
+  const handleJoinSubmit = (event) => {
+    event.preventDefault();
+
+    // Perform actions on form submission, e.g., API calls, redirect, etc.
+
+    // For demonstration purposes, let's simulate a redirect after joining.
+    if (selectedCategory) {
+      // Simulate redirect based on the selected category.
+      switch (selectedCategory) {
+        case 'Doctor':
+          window.location.href = '/doctor-dashboard';
+          break;
+        case 'Agricultural Labor':
+          window.location.href = '/agricultural-labor-dashboard';
+          break;
+        // Add more cases for other categories as needed.
+        default:
+          // Redirect to a default page if the category is not handled.
+          window.location.href = '/dashboard';
+      }
+    }
+
+    // Close the modal after submitting the form.
+    setShowJoinModal(false);
   };
 
   return (
@@ -239,7 +289,7 @@ const ConnectPage = () => {
             <Modal.Title>Join and Upload Your Image</Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <Form>
+            <Form onSubmit={handleJoinSubmit}>
               <Form.Group controlId="formBasicName">
                 <Form.Label>Your Name</Form.Label>
                 <Form.Control type="text" placeholder="Enter your name" />
