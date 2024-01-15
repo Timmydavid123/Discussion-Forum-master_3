@@ -22,7 +22,7 @@ class PostReply extends Form {
       window.location = `/post/${this.props.id}`;
     } catch (ex) {}
   };
-  render() {
+  render() {  
     const { data, errors } = this.state;
     return (
       <React.Fragment>
