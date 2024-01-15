@@ -15,10 +15,7 @@ const newsRouter = require('./controller/newsController');
 
 const app = express();
 
-
 const { MONGODB_URI } = process.env;
-
-// console.log('MongoDB Connection URI:', MONGODB_URI);
 
 mongoose.connect(MONGODB_URI, {
   useNewUrlParser: true,
@@ -31,38 +28,46 @@ mongoose.connect(MONGODB_URI, {
     console.error('MongoDB connection error:', error);
   });
 
-  app.use(cors({
-    origin: 'https://discussion-forum-master-3.vercel.app',
-    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-    credentials: true,
-    optionsSuccessStatus: 204,
-    allowedHeaders: '*',
-  }));
-  
-  app.use(express.json());
-  app.use(express.urlencoded({ extended: true }));
-  app.use(cookieParser());
-  
-  // Add the Cross-Origin-Opener-Policy header here
-  app.use((req, res, next) => {
-    res.setHeader('Cross-Origin-Opener-Policy', 'same-origin');
-    next();
-  });
-  
-  app.get("/", (req, res) => {
-    res.send("request successfully sent!");
-  });
-  
-  app.use("/users", users);
-  app.use("/posts", posts);
-  app.use("/tags", tags);
-  app.use("/reply", replies);
-  
-  // Include the news-related routes
-  app.use(newsRouter);
-  
-  const port = process.env.PORT || 4000;
-  
-  app.listen(port, () => {
-    console.log(`App running on port ${port}`);
-  });
+// Additional CORS configuration
+app.use(function(req, res, next) {
+  res.setHeader('Access-Control-Allow-Origin', 'https://discussion-forum-master-3.vercel.app');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+  next();
+});
+
+app.use(cors({
+  origin: 'https://discussion-forum-master-3.vercel.app',
+  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+  credentials: true,
+  optionsSuccessStatus: 204,
+  allowedHeaders: '*',
+}));
+
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(cookieParser());
+
+// Add the Cross-Origin-Opener-Policy header here
+app.use((req, res, next) => {
+  res.setHeader('Cross-Origin-Opener-Policy', 'same-origin');
+  next();
+});
+
+app.get("/", (req, res) => {
+  res.send("request successfully sent!");
+});
+
+app.use("/users", users);
+app.use("/posts", posts);
+app.use("/tags", tags);
+app.use("/reply", replies);
+
+// Include the news-related routes
+app.use(newsRouter);
+
+const port = process.env.PORT || 4000;
+
+app.listen(port, () => {
+  console.log(`App running on port ${port}`);
+});
