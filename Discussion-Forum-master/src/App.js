@@ -15,7 +15,6 @@ import Register from "./components/register";
 import NavBar from "./components/navbar";
 import ProtectedRoute from "./components/common/protectedRoute";
 import PostPage from "./components/PostPage";
-import NewsPage from "./components/news/news.jsx"
 import ConnectPage from "./components/Connect/ConnectPage.jsx"
 import Newss from "./components/news/news2.jsx"
 import SearchResultsPage from "./components/common/SearchResultsPage.js";
@@ -57,9 +56,9 @@ class App extends Component {
             render={(props) => <PostPage {...props} user={this.state.user} />}
           />
           
-          <Route exact path="/news" component={NewsPage} />
+          
           <Route exact path="/connect" component={ConnectPage} />
-          <Route exact path="/newss" component={Newss} />
+          <Route exact path="/news" component={Newss} />
           <Redirect from="/users" to="/users/login " />
           <Redirect to="/not-found" />
         </Switch>

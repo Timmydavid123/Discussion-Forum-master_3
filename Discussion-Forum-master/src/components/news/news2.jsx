@@ -38,7 +38,7 @@ const News = () => {
               <h2>{newsItem.title}</h2>
               <p>{newsItem.content}</p>
               <p>Category: {newsItem.category}</p>
-              <img src={newsItem.imageUrl} alt={newsItem.title} />
+              <img src={`http://localhost:5000${newsItem.imageUrl}`} alt={newsItem.title} />
             </div>
           </div>
         ))}
@@ -52,7 +52,7 @@ const News = () => {
               <h2>{newsItem.title}</h2>
               <p>{newsItem.content}</p>
               <p>Category: {newsItem.category}</p>
-              <img src={newsItem.imageUrl} alt={newsItem.title} />
+              <img src={`http://localhost:5000${newsItem.imageUrl}`} alt={newsItem.title} />
             </div>
           </div>
         ))}

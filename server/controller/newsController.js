@@ -1,8 +1,7 @@
 const express = require('express');
 const router = express.Router();
-const axios = require('axios');
 const NewsAPI = require('newsapi');
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 
 const newsSchema = new mongoose.Schema({
   title: String,
@@ -14,19 +13,21 @@ const newsSchema = new mongoose.Schema({
 
 const News = mongoose.model('News', newsSchema);
 
+// Create an instance of the News API with your API key
+const newsapi = new NewsAPI(process.env.NEWS_API_KEY);
+
 async function getTrendingNews() {
   try {
-    const apiKey = process.env.NEWS_API_KEY;
-    const country = 'ng';
-    const response = await axios.get(
-      `https://newsapi.org/v2/top-headlines?country=${country}&apiKey=${apiKey}`
-    );
+    // Fetch top headlines from the News API
+    const response = await newsapi.v2.topHeadlines({
+      country: 'ng',
+    });
 
-    const trendingNews = response.data.articles.map((article) => ({
+    const trendingNews = response.articles.map((article) => ({
       title: article.title,
       content: article.description,
       category: article.source.name,
-      imageUrl: article.urlToImage,
+      imageUrl: `/public/${article.urlToImage}`, // Add this prefix
       date: article.publishedAt,
     }));
 
@@ -38,21 +39,20 @@ async function getTrendingNews() {
 
 async function getAllNews(source = null) {
   try {
-    let apiUrl;
+    // Fetch top headlines from the News API based on source
+    const response = source
+      ? await newsapi.v2.topHeadlines({
+          sources: source,
+        })
+      : await newsapi.v2.topHeadlines({
+          country: 'ng',
+        });
 
-    if (source) {
-      apiUrl = `https://newsapi.org/v2/top-headlines?sources=${source}&apiKey=${process.env.NEWS_API_KEY}`;
-    } else {
-      apiUrl = `https://newsapi.org/v2/top-headlines?country=ng&apiKey=${process.env.NEWS_API_KEY}`;
-    }
-
-    const response = await axios.get(apiUrl);
-
-    const allNews = response.data.articles.map((article) => ({
+    const allNews = response.articles.map((article) => ({
       title: article.title,
       content: article.description,
       category: article.source.name,
-      imageUrl: article.urlToImage,
+      imageUrl: `/public/${article.urlToImage}`, // Add this prefix
       date: article.publishedAt,
     }));
 

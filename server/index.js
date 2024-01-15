@@ -3,6 +3,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const cookieParser = require("cookie-parser");
 const cors = require("cors");
+const path = require('path');
 const users = require("./routes/users");
 const posts = require("./routes/posts");
 const tags = require("./routes/tags");
@@ -49,6 +50,9 @@ app.use(cookieParser());
 app.options("*", (req, res) => {
   res.sendStatus(200);
 });
+
+// Serve static files from the 'public' directory
+app.use('/public', express.static(path.join(__dirname, 'public')));
 
 // Define a simple mongoose model
 const Item = mongoose.model('Item', {
