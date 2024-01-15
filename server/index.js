@@ -34,11 +34,10 @@ mongoose.connect(MONGODB_URI, {
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));                       
 app.use(cookieParser());
-app.use(cors());
 
 // Define corsOptions before using it
 const corsOptions = {
-  origin: 'https://discussion-forum-master-3.vercel.app/',
+  origin: 'https://discussion-forum-master-3.vercel.app',
   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
   credentials: true,
   optionsSuccessStatus: 204,
