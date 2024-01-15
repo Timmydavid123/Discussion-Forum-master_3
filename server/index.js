@@ -38,7 +38,7 @@ app.use(cors());
 
 // Define corsOptions before using it
 const corsOptions = {
-  origin: '*',
+  origin: 'https://discussion-forum-master-3.vercel.app/',
   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
   credentials: true,
   optionsSuccessStatus: 204,
@@ -70,13 +70,6 @@ app.use("/reply", replies);
 // Include the news-related routes
 app.use(newsRouter);
 
-
-
-
-setInterval(async () => {
-  const allNews = await getAllNews();
-  io.emit('trendingNews', allNews);
-}, 60000);
 
 const port = process.env.PORT || 4000;
 
