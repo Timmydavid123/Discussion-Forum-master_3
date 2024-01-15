@@ -31,47 +31,38 @@ mongoose.connect(MONGODB_URI, {
     console.error('MongoDB connection error:', error);
   });
 
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));                       
-app.use(cookieParser());
-
-// Define corsOptions before using it
-const corsOptions = {
-  origin: 'https://discussion-forum-master-3.vercel.app',
-  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-  credentials: true,
-  optionsSuccessStatus: 204,
-  allowedHeaders: 'Content-Type, Authorization',
-};
-
-// Handle preflight requests
-app.options('*', cors(corsOptions));
-
-// Use the CORS middleware for all routes
-app.use(cors(corsOptions));
-
-// Add the Cross-Origin-Opener-Policy header here
-app.use((req, res, next) => {
-  res.setHeader('Cross-Origin-Opener-Policy', 'same-origin');
-  next();
-});
-
-
-app.get("/", (req, res) => {
-  res.send("request successfully sent!");
-});
-
-app.use("/users", users);
-app.use("/posts", posts);
-app.use("/tags", tags);
-app.use("/reply", replies);
-
-// Include the news-related routes
-app.use(newsRouter);
-
-
-const port = process.env.PORT || 4000;
-
-app.listen(port, () => {
-  console.log(`App running on port ${port}`);
-});
+  app.use(cors({
+    origin: 'https://discussion-forum-master-3.vercel.app',
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+    credentials: true,
+    optionsSuccessStatus: 204,
+    allowedHeaders: 'Content-Type, Authorization',
+  }));
+  
+  app.use(express.json());
+  app.use(express.urlencoded({ extended: true }));
+  app.use(cookieParser());
+  
+  // Add the Cross-Origin-Opener-Policy header here
+  app.use((req, res, next) => {
+    res.setHeader('Cross-Origin-Opener-Policy', 'same-origin');
+    next();
+  });
+  
+  app.get("/", (req, res) => {
+    res.send("request successfully sent!");
+  });
+  
+  app.use("/users", users);
+  app.use("/posts", posts);
+  app.use("/tags", tags);
+  app.use("/reply", replies);
+  
+  // Include the news-related routes
+  app.use(newsRouter);
+  
+  const port = process.env.PORT || 4000;
+  
+  app.listen(port, () => {
+    console.log(`App running on port ${port}`);
+  });
