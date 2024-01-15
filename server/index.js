@@ -49,7 +49,7 @@ app.get("/", (req, res) => {
 });
 
 app.use("/users", users);
-app.use("/posts", posts);
+app.options("/posts/", cors());
 app.use("/tags", tags);
 app.use("/reply", replies);
 
