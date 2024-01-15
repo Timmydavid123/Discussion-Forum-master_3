@@ -24,24 +24,21 @@ mongoose.connect(MONGODB_URI, {
     console.error('MongoDB connection error:', error);
   });
 
+  app.use(cors());
 // CORS middleware
-app.use(cors({
-  origin: 'https://discussion-forum-master-3.vercel.app',
-  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-  credentials: true,
-  optionsSuccessStatus: 204,
-  allowedHeaders: 'Content-Type, Authorization',
-}));
+app.use((req, res, next) => {
+  res.setHeader("Access-Control-Allow-Origin", "https://discussion-forum-master-3.vercel.app");
+  res.setHeader("Access-Control-Allow-Methods", "POST, GET, PUT");
+  res.setHeader("Access-Control-Allow-Headers", "Content-Type", "Authorization");
+  next();
+});
+
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
-// Add the Cross-Origin-Opener-Policy header here
-app.use((req, res, next) => {
-  res.setHeader('Cross-Origin-Opener-Policy', 'same-origin');
-  next();
-});
+
 
 // Route to handle OPTIONS requests for /posts/
 app.options("/posts/", (req, res) => {
