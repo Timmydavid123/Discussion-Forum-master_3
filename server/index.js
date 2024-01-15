@@ -1,16 +1,12 @@
 require('dotenv').config();
 const express = require("express");
 const mongoose = require("mongoose");
-const jwt = require("jsonwebtoken");
-const config = require("config");
 const cookieParser = require("cookie-parser");
 const cors = require("cors");
 const users = require("./routes/users");
 const posts = require("./routes/posts");
 const tags = require("./routes/tags");
 const replies = require("./routes/replies");
-const http = require('http');
-const socketIO = require('socket.io');
 const newsRouter = require('./controller/newsController');
 
 const app = express();
@@ -28,20 +24,13 @@ mongoose.connect(MONGODB_URI, {
     console.error('MongoDB connection error:', error);
   });
 
-// Additional CORS configuration
-app.use(function(req, res, next) {
-  res.setHeader('Access-Control-Allow-Origin', 'https://discussion-forum-master-3.vercel.app');
-  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
-  next();
-});
-
+// CORS middleware
 app.use(cors({
   origin: 'https://discussion-forum-master-3.vercel.app',
   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
   credentials: true,
   optionsSuccessStatus: 204,
-  allowedHeaders: '*',
+  allowedHeaders: 'Content-Type, Authorization',
 }));
 
 app.use(express.json());
