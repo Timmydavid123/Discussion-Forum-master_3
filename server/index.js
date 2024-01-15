@@ -50,6 +50,33 @@ app.options("*", (req, res) => {
   res.sendStatus(200);
 });
 
+// Define a simple mongoose model
+const Item = mongoose.model('Item', {
+  title: String,
+  description: String,
+});
+
+// Route to handle search requests
+app.get('/api/search', async (req, res) => {
+  const { query } = req.query;
+
+  try {
+    // Use a regular expression for case-insensitive matching
+    const results = await Item.find({
+      $or: [
+        { title: { $regex: new RegExp(query, 'i') } },
+        { description: { $regex: new RegExp(query, 'i') } },
+      ],
+    });
+
+    res.json(results);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
+
+
 app.get("/", (req, res) => {
   res.send("request successfully sent!");
 });

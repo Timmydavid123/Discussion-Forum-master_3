@@ -18,6 +18,7 @@ import PostPage from "./components/PostPage";
 import NewsPage from "./components/news/news.jsx"
 import ConnectPage from "./components/Connect/ConnectPage.jsx"
 import Newss from "./components/news/news2.jsx"
+import SearchResultsPage from "./components/common/SearchResultsPage.js";
 
 class App extends Component {
   state = {};
@@ -41,6 +42,7 @@ class App extends Component {
           <Route path="/users/register" component={Register} />
           <Route path="/users/logout" component={Logout} />
           <Route exact path="/" component={Jumotron} />
+          <Route path="/search-results" component={SearchResultsPage} />
           <Route
             path="/dashboard"
             render={(props) => <Dashboard {...props} user={this.state.user} />}

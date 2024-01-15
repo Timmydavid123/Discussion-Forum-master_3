@@ -1,6 +1,6 @@
 export const api = {  
-  tagsEndPoint: 'https://backendxooth.vercel.app/tags/',
-  usersEndPoint: 'https://backendxooth.vercel.app/users/',
-  postsEndPoint: 'https://backendxooth.vercel.app/posts/',
-  repliesEndPoint: 'https://backendxooth.vercel.app/reply/',
+  tagsEndPoint: 'http://localhost:5000/tags/',
+  usersEndPoint: 'http://localhost:5000/users/',
+  postsEndPoint: 'http://localhost:5000/posts/',
+  repliesEndPoint: 'http://localhost:5000/reply/',
 }

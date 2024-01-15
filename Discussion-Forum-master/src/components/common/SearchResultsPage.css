@@ -1,0 +1,25 @@
+.search-results-container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  .search-results-heading {
+    font-size: 24px;
+    margin-bottom: 10px;
+  }
+  
+  .search-results-list {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .search-results-item {
+    border-bottom: 1px solid #ccc;
+    padding: 10px 0;
+  }
+  
+  .no-results-message {
+    font-style: italic;
+    color: #888;
+  }
