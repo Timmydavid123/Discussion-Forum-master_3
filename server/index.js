@@ -43,6 +43,11 @@ app.use((req, res, next) => {
   next();
 });
 
+// Route to handle OPTIONS requests for /posts/
+app.options("/posts/", (req, res) => {
+  res.sendStatus(200);
+});
+
 app.get("/", (req, res) => {
   res.send("request successfully sent!");
 });
