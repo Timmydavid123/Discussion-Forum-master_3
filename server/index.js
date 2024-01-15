@@ -35,12 +35,18 @@ app.use((req, res, next) => {
   next();
 });
 
+// Use the CORS proxy for every request
+app.use((req, res, next) => {
+  req.headers['x-target-url'] = 'https://backendxooth.vercel.app'; // Replace with your actual backend URL
+  next();
+});
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
-// Route to handle OPTIONS requests for /posts/
-app.options("/posts/", (req, res) => {
+// Route to handle OPTIONS requests for all routes
+app.options("*", (req, res) => {
   res.sendStatus(200);
 });
 
@@ -49,7 +55,7 @@ app.get("/", (req, res) => {
 });
 
 app.use("/users", users);
-app.options("/posts/", cors());
+app.use("/posts", posts);
 app.use("/tags", tags);
 app.use("/reply", replies);
 
